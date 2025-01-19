@@ -1,5 +1,5 @@
 # Sign_language-detection
-nullclass internship task 5
+nullclass internship task 
 import cv2
 import tensorflow
 collect realtime dataset
