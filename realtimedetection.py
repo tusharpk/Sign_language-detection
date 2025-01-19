@@ -14,7 +14,7 @@ def extract_features(image):
     return feature/255.0
 
 cap = cv2.VideoCapture(0)
-#label = ['A', 'B', 'C', 'D', 'E', 'blank']
+
 label = ['Hello', 'Hii', 'Namste', 'Thanks', 'blank']
 while True:
     _,frame = cap.read()
@@ -24,13 +24,13 @@ while True:
     cropframe = cv2.resize(cropframe,(48,48))
     cropframe = extract_features(cropframe)
     pred = model.predict(cropframe) 
-    prediction_label = label[pred.argmax()]
+    prediction = label[pred.argmax()]
     cv2.rectangle(frame, (0,0), (300, 40), (0, 165, 255), -1)
-    if prediction_label == 'blank':
+    if prediction == 'blank':
         cv2.putText(frame, " ", (10, 30),cv2.FONT_HERSHEY_SIMPLEX,1, (255, 255, 255),2,cv2.LINE_AA)
     else:
         accu = "{:.2f}".format(np.max(pred)*100)
-        cv2.putText(frame, f'{prediction_label}  {accu}%', (10, 30),cv2.FONT_HERSHEY_SIMPLEX,1, (255, 255, 255),2,cv2.LINE_AA)
+        cv2.putText(frame, f'{prediction}  {accu}%', (10, 30),cv2.FONT_HERSHEY_SIMPLEX,1, (255, 255, 255),2,cv2.LINE_AA)
     cv2.imshow("output",frame)
     cv2.waitKey(27)
     
